@@ -1,22 +1,29 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UiController : MonoBehaviour
 {
-    public GameController gameController;
-    private Canvas _canvas;
-    private Text _metalText;
+    public UiContainerController uiContainerController;
+    public Text resourcesText;
 
-    void Awake()
+    private GameController _gameController;
+
+    private void Start()
     {
-        // _canvas = GetComponent<Canvas>();
-        // _metalText = _canvas.GetComponent<Text>();
+        _gameController = uiContainerController.gameController;
     }
 
     void Update()
     {
-        // _metalText.text = $"Metal: {gameController.currentMetalAmount} / {gameController.maxMetalAmount}";
+        resourcesText.text = String.Join(
+            "\n",
+            _gameController.maxResourceAmounts.Keys.Select(
+                tag => $"{tag}: {_gameController.collectedResourceCounts[tag]} / {_gameController.maxResourceAmounts[tag]}"
+            )
+        );
     }
 }

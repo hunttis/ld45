@@ -22,11 +22,11 @@ public class MineController : MonoBehaviour
     {
         var resource = Instantiate(
             resourceObject,
-            transform.position + transform.right * 2.0f,
+            transform.position + transform.right * 2.0f + transform.forward * 0.5f,
             Quaternion.identity
         );
         var body = resource.GetComponent<Rigidbody>();
 
-        body.AddForce(transform.right * 100.0f);
+        body.AddForce(transform.right * 200.0f);
     }
 }

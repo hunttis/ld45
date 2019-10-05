@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 7311181805367334158}
   - component: {fileID: 3911939736653261303}
   - component: {fileID: 6732524319256787035}
-  - component: {fileID: -7695496409017830676}
   m_Layer: 0
   m_Name: Mine
   m_TagString: Untagged
@@ -87,27 +86,10 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3348099194155031851}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 409924d33ba57401cb42655137edbd6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   resourceObject: {fileID: 0}
   spawnRate: 0
---- !u!114 &-7695496409017830676
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3348099194155031851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b983e7c472b4b109e28dab1a15f3f08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  resourceObject: {fileID: 8487116122409520546, guid: 4b95354ee55464a0789c061320e42e55,
-    type: 3}
-  direction: {x: 0.3, y: 0.3, z: 0.3}
-  fireInterval: 5
-  velocity: 200

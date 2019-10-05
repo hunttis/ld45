@@ -6,34 +6,58 @@ using Random = UnityEngine.Random;
 
 public class FireController : MonoBehaviour
 {
-    public GameObject resourceObject;
+    public GameObject resource;
     public Vector3 direction; // should be a unit vector
     public float fireInterval;
     public float velocity;
-    
+
+    private bool m_IsLoaded = false;
+
     private const float Tilt = 0.1f;
     private const int NormN = 6; // Quality of the random numbers; the higher the better
-    
+
     void Start()
     {
         direction = direction.normalized;
-        InvokeRepeating(nameof(GenerateProjectiles), 0.0f, fireInterval);
     }
 
     private void Update()
     {
     }
 
-    void GenerateProjectiles()
+    void OnCollisionStay(Collision other)
     {
-        var resource = Instantiate(
-            resourceObject,
-            transform.position + direction,
-            Quaternion.identity
-        );
+        HandleLoading(other);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        HandleLoading(other);
+    }
+
+    private void HandleLoading(Collision other)
+    {
+        if (m_IsLoaded || !IsLoadable(other)) return;
+        m_IsLoaded = true;
+        resource = other.gameObject;
+        resource.SetActive(false);
+        Invoke(nameof(FireResource), fireInterval);
+    }
+
+    private bool IsLoadable(Collision other)
+    {
+        return other.gameObject.CompareTag("Metal");
+    }
+
+    void FireResource()
+    {
+        resource.transform.position = transform.position + Vector3.up + direction;
+        resource.SetActive(true);
         var body = resource.GetComponent<Rigidbody>();
 
         body.AddForce(direction * velocity);
+
+        m_IsLoaded = false;
 
         var theta = NormRand(Tilt);
         var tau = NormRand(Tilt);
