@@ -11,12 +11,12 @@ public class UiController : MonoBehaviour
 
     void Awake()
     {
-        _canvas = GetComponent<Canvas>();
-        _metalText = _canvas.GetComponent<Text>();
+        // _canvas = GetComponent<Canvas>();
+        // _metalText = _canvas.GetComponent<Text>();
     }
 
     void Update()
     {
-        _metalText.text = $"Metal: {gameController.currentMetalAmount} / {gameController.maxMetalAmount}";
+        // _metalText.text = $"Metal: {gameController.currentMetalAmount} / {gameController.maxMetalAmount}";
     }
 }
