@@ -7,45 +7,38 @@ using Random = UnityEngine.Random;
 public class FireController : MonoBehaviour
 {
     public float offset = 0.0f;
-    public float fireInterval = 1.0f;
+    public float reloadTime = 1.0f;
     public float velocity = 10.0f;
 
-
-    private bool _isLoaded = false;
-    private GameObject _resource;
+    private float _reloadStatus;
+    private GameObject _resourceToShoot;
     private const float Tilt = 0.1f;
     private const int NormN = 6; // Quality of the random numbers; the higher the better
 
     private void OnTriggerStay(Collider other)
     {
-        HandleLoading(other);
+        if (!other.gameObject.GetComponent<Resource>()) return;
+        _resourceToShoot = other.gameObject;
     }
 
-    private void HandleLoading(Component other)
+    private void FixedUpdate()
     {
-        if (_isLoaded || !IsLoadable(other)) return;
-        _isLoaded = true;
-        _resource = other.gameObject;
-        _resource.SetActive(false);
-        Invoke(nameof(FireResource), fireInterval);
+        if (_reloadStatus < reloadTime) _reloadStatus += 1.0f / 60;
+        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation, not called on every frame
+        if (_resourceToShoot && _reloadStatus >= reloadTime) Shoot();
     }
 
-    private static bool IsLoadable(Component other)
-    {
-        return other.gameObject.CompareTag("Metal");
-    }
-
-    private void FireResource()
+    private void Shoot()
     {
         var shooter = transform;
         var shotDirection = shooter.forward;
-        _resource.transform.position = shooter.position + shotDirection * offset;
-        _resource.SetActive(true);
+        _resourceToShoot.transform.position = shooter.position + shotDirection * offset;
 
-        var body = _resource.GetComponent<Rigidbody>();
+        var body = _resourceToShoot.GetComponent<Rigidbody>();
         body.AddForce(shotDirection * velocity, ForceMode.Impulse);
 
-        _isLoaded = false;
+        _reloadStatus -= reloadTime;
+        _resourceToShoot = null;
 
 //        var theta = NormRand(Tilt);
 //        var tau = NormRand(Tilt);
