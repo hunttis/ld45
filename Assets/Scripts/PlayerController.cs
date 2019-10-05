@@ -5,12 +5,12 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    public Rigidbody rb;
     public float speed = 10.0f;
     public float jumpHeight = 2f;
     public Vector3 movement;
     public LayerMask ground;
 
+    private Rigidbody _rb;
     private bool _isJumping;
     private float _groundDistance;
     private bool _isGrounded;
@@ -19,16 +19,16 @@ public class PlayerController : MonoBehaviour
     // Use this for initialization
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
-        _groundDistance = (float) (GetComponent<Renderer>().bounds.size.y * 0.55);
+        _rb = GetComponent<Rigidbody>();
+        _groundDistance = (float) (GetComponent<Collider>().bounds.size.y * 0.55);
     }
 
     // Update is called once per frame
     private void Update()
     {
-        movement = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-        _isGrounded = Physics.CheckSphere(rb.position, _groundDistance, ground, QueryTriggerInteraction.Ignore);
+        _isGrounded = Physics.CheckSphere(_rb.position, _groundDistance, ground, QueryTriggerInteraction.Ignore);
         _isJumping = Input.GetButtonDown("Jump") && _isGrounded;
     }
 
@@ -40,11 +40,11 @@ public class PlayerController : MonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        rb.AddForce(direction * speed);
+        _rb.AddForce(direction * speed);
     }
 
     private void Jump()
     {
-        rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
     }
 }
