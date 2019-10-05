@@ -111,6 +111,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: CameraTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: ground.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48681a072af432548b5223765408b971, type: 3}
 --- !u!4 &3495978690893789735 stripped
@@ -126,11 +141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3495978690038007944}
     m_Modifications:
-    - target: {fileID: 7152597170779271089, guid: 9546558400e1de345b38aafd103cdf48,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerModel
-      objectReference: {fileID: 0}
     - target: {fileID: 7152597170779271091, guid: 9546558400e1de345b38aafd103cdf48,
         type: 3}
       propertyPath: m_LocalPosition.x
