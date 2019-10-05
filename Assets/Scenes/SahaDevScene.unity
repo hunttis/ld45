@@ -401,7 +401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4dfd3017dc83e4ff8a30e81dea3ca23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxMetalAmount: 5
 --- !u!1 &1918798351
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,7 +658,7 @@ PrefabInstance:
     - target: {fileID: 5342540519539085504, guid: 069c34c272e7b4716976439dd60a69f2,
         type: 3}
       propertyPath: m_Name
-      value: UI
+      value: HUD
       objectReference: {fileID: 0}
     - target: {fileID: 8207931807011482235, guid: 069c34c272e7b4716976439dd60a69f2,
         type: 3}
