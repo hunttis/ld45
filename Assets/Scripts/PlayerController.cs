@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 10.0f;
     public float jumpHeight = 2f;
-    public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
+    public Vector2 mouseSensitivity = new Vector2(2.0f, -0.4f);
     public Vector3 movement;
     public LayerMask ground;
     public float cameraHeightMin = 0;
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         LockCursor();
         transform.SetParent(null);
     }
-    
+
     private void Update()
     {
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
