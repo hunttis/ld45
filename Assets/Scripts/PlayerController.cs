@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         switch (newState)
         {
             case ControllerState.Placing:
-                _spawnableCannon = Instantiate(CannonPrefab, _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
+                _spawnableCannon = Instantiate(Resources.Load<Transform>("Cannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
                 _spawnableCannon.Rotate(Vector3.up, 90);
                 _spawnableCannon.GetComponent<Collider>().enabled = false;
                 break;
