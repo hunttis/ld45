@@ -12,7 +12,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
     public Vector3 movement;
     public LayerMask ground;
-    public Transform CameraTarget;
     public float cameraHeightMin = 0;
     public float cameraHeightMax = 3.0f;
 
@@ -22,7 +21,7 @@ public class PlayerController : MonoBehaviour
     private float _groundDistance;
     private bool _isGrounded;
     private Transform _groundChecker;
-    
+    private PlayerCameraPositionTarget cameraTarget;
     private PlayerModel _playerModel;
 
     public static void LockCursor()
@@ -39,8 +38,10 @@ public class PlayerController : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _groundDistance = GetComponent<Collider>().bounds.size.y * 0.55f;
         _playerModel = FindObjectOfType<PlayerModel>();
+        cameraTarget = FindObjectOfType<PlayerCameraPositionTarget>();
 
         LockCursor();
+        transform.SetParent(null);
     }
     
     private void Update()
@@ -52,16 +53,17 @@ public class PlayerController : MonoBehaviour
 
         if (MouseLocked)
         {
-            _playerModel.transform.Rotate(0, Input.GetAxis("Mouse X")*mouseSensitivity.x, 0);
-            
-            if (CameraTarget != null)
+            _playerModel.transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSensitivity.x, 0);
+
+            if (cameraTarget != null)
             {
-                Vector3 cameraTargetPos = CameraTarget.localPosition;
-                cameraTargetPos.y = Mathf.Clamp(cameraTargetPos.y + Input.GetAxis("Mouse Y")*mouseSensitivity.y, cameraHeightMin, cameraHeightMax);
-                CameraTarget.localPosition = cameraTargetPos;
+                Vector3 cameraTargetPos = cameraTarget.transform.localPosition;
+                cameraTargetPos.y = Mathf.Clamp(cameraTargetPos.y + Input.GetAxis("Mouse Y") * mouseSensitivity.y, cameraHeightMin, cameraHeightMax);
+                cameraTarget.transform.localPosition = cameraTargetPos;
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.LeftControl)) ToggleMouseLock();
+
     }
 
     private void ToggleMouseLock()
@@ -80,7 +82,6 @@ public class PlayerController : MonoBehaviour
     {
         Move(movement);
         if (_isJumping) Jump();
-        
     }
 
     private void Move(Vector3 direction)

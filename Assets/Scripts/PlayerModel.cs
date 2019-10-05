@@ -12,6 +12,12 @@ public class PlayerModel : MonoBehaviour
         if (_ctrl == null) Debug.LogError("PlayerController not found in scene!");
         _t = GetComponent<Transform>();
     }
+    private void Start()
+    {
+        Transform p = transform.parent;
+        transform.SetParent(null);
+        Destroy(p.gameObject);
+    }
     // Update is called once per frame
     void Update()
     {

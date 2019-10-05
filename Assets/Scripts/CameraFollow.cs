@@ -25,12 +25,9 @@ public class CameraFollow : MonoBehaviour
         _cameraLastTarget = positionFollowTarget.position;
     }
 
-    private void FixedUpdate()
+    private void LateUpdate()
     {
-        _cameraLastTarget = Vector3.Lerp(_cameraLastTarget, positionFollowTarget.position, followSpeed * 2);
-        var angleOfAttack = Quaternion.AngleAxis(angle, Vector3.right);
-        _offset = angleOfAttack * -positionFollowTarget.forward * distance;
-         transform.position = Vector3.Lerp(_cameraLastTarget, _cameraLastTarget + _offset, followSpeed);
-         transform.LookAt(_player.transform);
+        transform.position = Vector3.MoveTowards(transform.position, positionFollowTarget.position, followSpeed + Vector3.Distance(transform.position, positionFollowTarget.position)*Time.deltaTime*4.0f);
+        transform.LookAt(_player.transform);
     }
 }
