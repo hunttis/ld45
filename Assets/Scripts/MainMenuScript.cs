@@ -7,7 +7,7 @@ public class MainMenuScript : MonoBehaviour
 {
     public void OnPlayClick()
     {
-        SceneManager.LoadScene("World 01", LoadSceneMode.Single);
+        SceneManager.LoadScene("SplashScene", LoadSceneMode.Single);
     }
 
     public void OnExitClick()
