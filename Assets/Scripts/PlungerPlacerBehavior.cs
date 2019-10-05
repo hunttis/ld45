@@ -33,7 +33,6 @@ public class PlungerPlacerBehavior : MonoBehaviour
   private GameObject _aimGuide;
   private Material _originalMaterial;
   private GameObject _placeholder;
-
   void Update()
   {
     var done = Input.GetButtonDown("Fire1");
@@ -56,7 +55,7 @@ public class PlungerPlacerBehavior : MonoBehaviour
 
     var position = transform.position;
     _placeholder = Instantiate(plungerPrefab, position, Quaternion.identity);
-    _placeholder.GetComponent<Renderer>().material = placeholderMaterial;
+    //_placeholder.GetComponent<Renderer>().material = placeholderMaterial;
 
     _aimGuide = Instantiate(aimGuidePrefab, position + (Vector3.forward * 2f), Quaternion.identity);
     UpdateAimGuide();
@@ -96,8 +95,8 @@ public class PlungerPlacerBehavior : MonoBehaviour
     var angle = yaw * pitch;
     
     var distance = (Vector3.forward * 2f);
-    
-    _aimGuide.transform.position = transform.position + angle * distance;
+    if(_aimGuide == null) _aimGuide = Instantiate(aimGuidePrefab, transform.position + (Vector3.forward * 2f), Quaternion.identity);
+        _aimGuide.transform.position = transform.position + angle * distance;
     _aimGuide.transform.rotation = angle * Quaternion.Euler(90f, 0f, 0f);
   }
 
@@ -109,7 +108,7 @@ public class PlungerPlacerBehavior : MonoBehaviour
   private void LockPitch()
   {
     _state = PlungerPlacerState.Idle;
-    Instantiate(plungerPrefab, transform.position, Quaternion.identity);
+    Instantiate(plungerPrefab, transform.position, transform.rotation);
     // TODO: pass rotation, aim params
     Destroy(_placeholder);
     Destroy(_aimGuide);

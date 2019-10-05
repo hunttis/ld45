@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901585266e148314586d08d11ff0e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plungerPrefab: {fileID: 0}
-  aimGuidePrefab: {fileID: 0}
-  cursor: {fileID: 0}
+  plungerPrefab: {fileID: 1934374586689297925, guid: 8605ccb3f0dcb1a45a5417ae7cec9f1a,
+    type: 3}
+  aimGuidePrefab: {fileID: 730536900622312834, guid: 315495a7277311e4dafa207bbda21123,
+    type: 3}
+  placeholderMaterial: {fileID: 2100000, guid: 3e1f78a0b1231f74081cdfaeb75ac406, type: 2}

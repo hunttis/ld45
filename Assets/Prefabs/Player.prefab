@@ -1,5 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &3495978690161162124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642596271952581431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8788fee67a1e82e4c98ac2927615d90a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3495978690038007945
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,18 +44,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3495978690161162124
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642596271952581431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8788fee67a1e82e4c98ac2927615d90a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1061258817309438674
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -115,7 +115,17 @@ PrefabInstance:
         type: 3}
       propertyPath: CameraTarget
       value: 
-      objectReference: {fileID: 6758970675522777187}
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: ground.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48681a072af432548b5223765408b971, type: 3}
 --- !u!4 &3495978690893789735 stripped
@@ -131,11 +141,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3495978690038007944}
     m_Modifications:
-    - target: {fileID: 7152597170779271089, guid: 9546558400e1de345b38aafd103cdf48,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerModel
-      objectReference: {fileID: 0}
     - target: {fileID: 7152597170779271091, guid: 9546558400e1de345b38aafd103cdf48,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -191,6 +196,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1012086328557901734, guid: 9546558400e1de345b38aafd103cdf48,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1012086328557901734, guid: 9546558400e1de345b38aafd103cdf48,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9546558400e1de345b38aafd103cdf48, type: 3}
 --- !u!4 &3495978689863813238 stripped
@@ -202,12 +217,6 @@ Transform:
 --- !u!1 &642596271952581431 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6570156762942502130, guid: 9546558400e1de345b38aafd103cdf48,
-    type: 3}
-  m_PrefabInstance: {fileID: 6036819267262359493}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &6758970675522777187 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1012086328557901734, guid: 9546558400e1de345b38aafd103cdf48,
     type: 3}
   m_PrefabInstance: {fileID: 6036819267262359493}
   m_PrefabAsset: {fileID: 0}

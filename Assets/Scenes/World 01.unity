@@ -728,5 +728,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3495978690893789754, guid: d3496c557e8f9f74a9b4cdea83be5521,
+        type: 3}
+      propertyPath: mouseSensitivity.y
+      value: -0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3496c557e8f9f74a9b4cdea83be5521, type: 3}

@@ -7,24 +7,23 @@ using UnityEngine.Serialization;
 
 public class LavaBehavior : MonoBehaviour
 {
-    private Material _material;
     public Vector2 mainTexOffset;
     public Vector2 secondaryTexOffset;
+    private Material _material;
+    private static readonly int MainTex = Shader.PropertyToID("_MainTex");
+    private static readonly int DetailAlbedoMap = Shader.PropertyToID("_DetailAlbedoMap");
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         _material = GetComponent<Renderer>().material;
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float timeOffset = Time.time;
-        Debug.Log(String.Join(",", _material.GetTexturePropertyNames().AsEnumerable()));
-        _material.SetTextureOffset("_MainTex", mainTexOffset * timeOffset);
-        _material.SetTextureOffset("_DetailAlbedoMap", secondaryTexOffset * timeOffset);
-
-
+        var timeOffset = Time.time;
+        _material.SetTextureOffset(MainTex, mainTexOffset * timeOffset);
+        _material.SetTextureOffset(DetailAlbedoMap, secondaryTexOffset * timeOffset);
     }
 }
