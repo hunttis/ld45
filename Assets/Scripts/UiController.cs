@@ -12,7 +12,7 @@ public class UiController : MonoBehaviour
 
     private GameController _gameController;
 
-    private void Awake()
+    private void Start()
     {
         _gameController = uiContainerController.gameController;
     }

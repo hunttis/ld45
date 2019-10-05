@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 8207931807011482235}
   - component: {fileID: 7747705566423479072}
   m_Layer: 0
-  m_Name: UI
+  m_Name: HUD
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -238,7 +238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiContainerController: {fileID: 7747705566423479072}
-  metalText: {fileID: 5972530591572565340}
+  resourcesText: {fileID: 5972530591572565340}
 --- !u!1 &5618351194461883232
 GameObject:
   m_ObjectHideFlags: 0
