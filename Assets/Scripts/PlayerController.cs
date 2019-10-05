@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum ControllerState { Moving, Placing, Adjusting }
+
 public class PlayerController : MonoBehaviour
 {
     public static bool MouseLocked { get { return Cursor.lockState != CursorLockMode.None; }}
@@ -12,8 +14,10 @@ public class PlayerController : MonoBehaviour
     public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
     public Vector3 movement;
     public LayerMask ground;
-    public float cameraHeightMin = 0;
-    public float cameraHeightMax = 3.0f;
+    public Transform CannonPrefab;
+
+    private float _cameraHeightMin = -0.5f;
+    private float _cameraHeightMax = 6.0f;
 
 
     private Rigidbody _rb;
@@ -24,6 +28,13 @@ public class PlayerController : MonoBehaviour
     private PlayerCameraPositionTarget cameraTarget;
     private PlayerModel _playerModel;
 
+    private Vector3 _placeModeVelocity;
+
+    private ControllerState _placeMode = ControllerState.Moving;
+    private Vector3 _mouseWorldPos = new Vector3();
+
+    private Transform _spawnableCannon;
+
     public static void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -32,7 +43,10 @@ public class PlayerController : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
     }
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(_mouseWorldPos, 1.0f);
+    }
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
@@ -43,7 +57,28 @@ public class PlayerController : MonoBehaviour
         LockCursor();
         transform.SetParent(null);
     }
-    
+
+    private void SwitchState(ControllerState newState)
+    {
+        switch (newState)
+        {
+            case ControllerState.Placing:
+                _spawnableCannon = Instantiate(CannonPrefab, _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
+                _spawnableCannon.Rotate(Vector3.up, 90);
+                _spawnableCannon.GetComponent<Collider>().enabled = false;
+                break;
+            case ControllerState.Adjusting:
+                LockCursor();
+                break;
+            case ControllerState.Moving:
+                LockCursor();
+
+                break;
+
+        }
+        _placeMode = newState;
+    }
+
     private void Update()
     {
         movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
@@ -58,11 +93,27 @@ public class PlayerController : MonoBehaviour
             if (cameraTarget != null)
             {
                 Vector3 cameraTargetPos = cameraTarget.transform.localPosition;
-                cameraTargetPos.y = Mathf.Clamp(cameraTargetPos.y + Input.GetAxis("Mouse Y") * mouseSensitivity.y, cameraHeightMin, cameraHeightMax);
+                cameraTargetPos.y = Mathf.Clamp(cameraTargetPos.y + Input.GetAxis("Mouse Y") * mouseSensitivity.y, _cameraHeightMin, _cameraHeightMax);
                 cameraTarget.transform.localPosition = cameraTargetPos;
             }
         }
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.LeftControl)) ToggleMouseLock();
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            switch (_placeMode)
+            {
+                case ControllerState.Moving:
+                    SwitchState(ControllerState.Placing);
+                    break;
+                case ControllerState.Placing:
+                    _spawnableCannon.SetParent(null);
+                    _spawnableCannon.GetComponent<Collider>().enabled = true;
+                    SwitchState(ControllerState.Moving);
+                    break;
+
+            }
+        }
 
     }
 

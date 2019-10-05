@@ -292,7 +292,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b983e7c472b4b109e28dab1a15f3f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resource: {fileID: 0}
+  resource: {fileID: 141695131242902254, guid: f82b7a218983a40a996c0c31dcc8029b, type: 3}
   direction: {x: -0.5, y: 1, z: 0.5}
   fireInterval: 0.5
   velocity: 2000
