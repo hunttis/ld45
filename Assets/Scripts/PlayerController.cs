@@ -9,15 +9,15 @@ public class PlayerController : MonoBehaviour
 {
     public static bool MouseLocked { get { return Cursor.lockState != CursorLockMode.None; }}
 
-    public float speed = 10.0f;
+    public float speed = 25.0f;
     public float jumpHeight = 2f;
     public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
     public Vector3 movement;
     public LayerMask ground;
     public Transform CannonPrefab;
 
-    private float _cameraHeightMin = -0.5f;
-    private float _cameraHeightMax = 6.0f;
+    private float _cameraHeightMin = -0.3f;
+    private float _cameraHeightMax = 10.0f;
 
 
     private Rigidbody _rb;
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
         switch (newState)
         {
             case ControllerState.Placing:
-                _spawnableCannon = Instantiate(CannonPrefab, _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
+                _spawnableCannon = Instantiate(Resources.Load<Transform>("Cannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
                 _spawnableCannon.Rotate(Vector3.up, 90);
                 _spawnableCannon.GetComponent<Collider>().enabled = false;
                 break;
