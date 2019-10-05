@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HUD
       objectReference: {fileID: 0}
+    - target: {fileID: 5618351193922891818, guid: 069c34c272e7b4716976439dd60a69f2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8207931807011482235, guid: 069c34c272e7b4716976439dd60a69f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -185,11 +190,6 @@ PrefabInstance:
     - target: {fileID: 8207931807011482235, guid: 069c34c272e7b4716976439dd60a69f2,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5618351193922891818, guid: 069c34c272e7b4716976439dd60a69f2,
-        type: 3}
-      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7747705566423479072, guid: 069c34c272e7b4716976439dd60a69f2,
@@ -343,7 +343,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: ad8ab88e4d3b44b5993735f1dc04058b, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -377,6 +377,7 @@ GameObject:
   - component: {fileID: 1262146253}
   - component: {fileID: 1262146252}
   - component: {fileID: 1262146251}
+  - component: {fileID: 1262146255}
   m_Layer: 0
   m_Name: Lava
   m_TagString: Untagged
@@ -458,6 +459,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1262146255
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1262146250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e400171b3fd8b4b9cb78670217f000b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainTexOffset: {x: 0.1, y: 0.1}
+  secondaryTexOffset: {x: -0.11, y: -0.13}
 --- !u!4 &1630593208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6758970675522777187, guid: d3496c557e8f9f74a9b4cdea83be5521,
@@ -632,7 +647,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 59.683002, y: 0, z: 0}
 --- !u!114 &2096210955 stripped
 MonoBehaviour:
@@ -696,7 +711,7 @@ PrefabInstance:
     - target: {fileID: 3495978690038007944, guid: d3496c557e8f9f74a9b4cdea83be5521,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3495978690038007944, guid: d3496c557e8f9f74a9b4cdea83be5521,
         type: 3}
