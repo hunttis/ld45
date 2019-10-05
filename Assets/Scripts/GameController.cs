@@ -1,24 +1,33 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    // current/max
-    // 3-5 resource types
-
-    public int currentMetalAmount;
-    public int maxMetalAmount;
-
-    void Start()
+    public Dictionary<string, int> collectedResourceCounts = new Dictionary<string, int>()
     {
-        currentMetalAmount = 0;
-    }
+        {"Metal", 0},
+        {"Another", 0},
+    };
+
+    public Dictionary<string, int> maxResourceAmounts = new Dictionary<string, int>()
+    {
+        {"Metal", 5},
+        {"Another", 3}
+    };
 
     void Update()
     {
 
+    }
+
+    void FixedUpdate()
+    {
+        if (collectedResourceCounts["Metal"] >= maxResourceAmounts["Metal"])
+        {
+            Debug.Log("🎉");
+        }
     }
 }
