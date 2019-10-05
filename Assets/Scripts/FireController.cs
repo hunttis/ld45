@@ -6,67 +6,55 @@ using Random = UnityEngine.Random;
 
 public class FireController : MonoBehaviour
 {
-    public GameObject resource;
-    public Vector3 direction; // should be a unit vector
-    public float fireInterval;
-    public float velocity;
+    public float offset = 0.0f;
+    public float fireInterval = 1.0f;
+    public float velocity = 10.0f;
 
-    private bool m_IsLoaded = false;
 
+    private bool _isLoaded = false;
+    private GameObject _resource;
     private const float Tilt = 0.1f;
     private const int NormN = 6; // Quality of the random numbers; the higher the better
 
-    void Start()
-    {
-        direction = direction.normalized;
-    }
-
-    private void Update()
-    {
-    }
-
-    void OnCollisionStay(Collision other)
+    private void OnTriggerStay(Collider other)
     {
         HandleLoading(other);
     }
 
-    void OnCollisionEnter(Collision other)
+    private void HandleLoading(Component other)
     {
-        HandleLoading(other);
-    }
-
-    private void HandleLoading(Collision other)
-    {
-        if (m_IsLoaded || !IsLoadable(other)) return;
-        m_IsLoaded = true;
-        resource = other.gameObject;
-        resource.SetActive(false);
+        if (_isLoaded || !IsLoadable(other)) return;
+        _isLoaded = true;
+        _resource = other.gameObject;
+        _resource.SetActive(false);
         Invoke(nameof(FireResource), fireInterval);
     }
 
-    private bool IsLoadable(Collision other)
+    private static bool IsLoadable(Component other)
     {
         return other.gameObject.CompareTag("Metal");
     }
 
-    void FireResource()
+    private void FireResource()
     {
-        resource.transform.position = transform.position + Vector3.up + direction;
-        resource.SetActive(true);
-        var body = resource.GetComponent<Rigidbody>();
+        var shooter = transform;
+        var shotDirection = shooter.forward;
+        _resource.transform.position = shooter.position + shotDirection * offset;
+        _resource.SetActive(true);
 
-        body.AddForce(direction * velocity);
+        var body = _resource.GetComponent<Rigidbody>();
+        body.AddForce(shotDirection * velocity, ForceMode.Impulse);
 
-        m_IsLoaded = false;
+        _isLoaded = false;
 
-        var theta = NormRand(Tilt);
-        var tau = NormRand(Tilt);
-        direction = Quaternion.Euler(0, theta, 0) * direction;
-
-        var dir2D = Vector3.ProjectOnPlane(direction, Vector3.up);
-        
-        direction = Quaternion.AngleAxis(tau, 
-                        Vector3.Cross(dir2D, Vector3.up)) * direction;
+//        var theta = NormRand(Tilt);
+//        var tau = NormRand(Tilt);
+//        direction = Quaternion.Euler(0, theta, 0) * direction;
+//
+//        var dir2D = Vector3.ProjectOnPlane(direction, Vector3.up);
+//
+//        direction = Quaternion.AngleAxis(tau,
+//                        Vector3.Cross(dir2D, Vector3.up)) * direction;
     }
 
     // Return approximately normally distributed random number (Irwin–Hall distribution)
