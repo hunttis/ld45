@@ -4,17 +4,18 @@ using UnityEngine;
 [Serializable]
 public class Resource : MonoBehaviour
 {
-    private AudioSource bumpSound;
+    private AudioSource _bumpSound;
 
     private void Awake()
     {
-        bumpSound = GetComponent<AudioSource>();
+        _bumpSound = GetComponent<AudioSource>();
     }
 
     private void OnCollisionEnter(Collision other)
     {
-        bumpSound.Play();
+        _bumpSound.Play();
     }
+
     public virtual string GetResourceType()
     {
         throw new NotImplementedException();
