@@ -5698,17 +5698,17 @@ PrefabInstance:
     - target: {fileID: 3495978690893789754, guid: d3496c557e8f9f74a9b4cdea83be5521,
         type: 3}
       propertyPath: jumpHeight
-      value: 15
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 3495978690893789755, guid: d3496c557e8f9f74a9b4cdea83be5521,
         type: 3}
       propertyPath: m_AngularDrag
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3495978690893789755, guid: d3496c557e8f9f74a9b4cdea83be5521,
         type: 3}
       propertyPath: m_Drag
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d3496c557e8f9f74a9b4cdea83be5521, type: 3}

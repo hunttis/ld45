@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     private float _cameraHeightMin = -0.3f;
     private float _cameraHeightMax = 10.0f;
 
+    public float _jetPackRefuelRate = 0.15f;
+    public float _jetPackFuelMax = 0.5f;
+    private float _jetPackFuel = 0.5f;
 
     private Rigidbody _rb;
     private bool _isJumping;
@@ -56,7 +59,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _groundDistance = GetComponent<Collider>().bounds.size.y * 0.75f;
+        _groundDistance = GetComponent<Collider>().bounds.size.y * 1f;
         _playerModel = FindObjectOfType<PlayerModel>();
         cameraTarget = FindObjectOfType<PlayerCameraPositionTarget>();
         _rb.maxAngularVelocity = 50f;
@@ -118,12 +121,15 @@ public class PlayerController : MonoBehaviour
                 _targetedCannon = null;
             }
 
-
-
             movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
-            _isGrounded = Physics.CheckSphere(_rb.position, _groundDistance, ground, QueryTriggerInteraction.Ignore);
-            _isJumping = Input.GetButtonDown("Jump") && _isGrounded;
+            _isJumping = Input.GetButton("Jump");
+            
+            if (!_isJumping && _jetPackFuel < _jetPackFuelMax)
+            {
+                _jetPackFuel = Mathf.Clamp(_jetPackFuel + _jetPackRefuelRate * Time.deltaTime, 0, _jetPackFuelMax);
+            }
+
 
             if (MouseLocked)
             {
@@ -184,7 +190,7 @@ public class PlayerController : MonoBehaviour
         {
             ReleaseCursor();
         }
-}
+    }
 
     private void FixedUpdate()
     {
@@ -196,14 +202,18 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector3 direction)
     {
         Vector3 rotatedDirection = Quaternion.Euler(0, 90, 0) * _playerModel.transform.TransformDirection(direction);
-        _rb.angularVelocity += rotatedDirection * speed;
-//        _rb.AddTorque(rotatedDirection * speed, ForceMode.VelocityChange);
+//        _rb.angularVelocity += rotatedDirection * speed;
+        _rb.AddTorque(rotatedDirection * speed, ForceMode.VelocityChange);
     }
 
     private void Jump()
     {
-        thumpSound.Play(0);
-        _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        if (_jetPackFuel > 0)
+        {
+            thumpSound.Play(0);
+            _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+            _jetPackFuel -= Time.deltaTime;
+        }
         
     }
 
