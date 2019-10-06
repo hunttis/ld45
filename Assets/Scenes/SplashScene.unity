@@ -362,6 +362,8 @@ MonoBehaviour:
   fader: {fileID: 241067516}
   explosion: {fileID: 8902627383779312323, guid: 6f83eb0300ed34dc28207b6ed876d99c,
     type: 3}
+  _explosionSoundFx: {fileID: 8300000, guid: 9333016b3d4f44bb98a98e29c73660d0, type: 3}
+  _crashSoundFx: {fileID: 8300000, guid: b019ece2951024b5996f4121b967b251, type: 3}
 --- !u!82 &375725255
 AudioSource:
   m_ObjectHideFlags: 0

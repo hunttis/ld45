@@ -15,7 +15,9 @@ public class SplashCameraController : MonoBehaviour
     private Vector3 _shakeOriginalPosition;
     private float _shakeAmount;
 
-    private AudioSource explosionSoundFX;
+    private AudioSource _audioSource;
+    public AudioClip _explosionSoundFx;
+    public AudioClip _crashSoundFx;
 
     void Start()
     {
@@ -24,11 +26,11 @@ public class SplashCameraController : MonoBehaviour
         _shakeOriginalPosition = transform.localPosition;
         _shakeAmount = 0.5f;
 
-        explosionSoundFX = GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
 
         Invoke(nameof(ExplosionSound), 0.5f);
         Invoke(nameof(ExplosionSound), 3.5f);
-        Invoke(nameof(ExplosionSound), 4.7f);
+        Invoke(nameof(CrashSound), 4.7f);
         Invoke(nameof(ShakeHarder), 3.0f);
         Invoke(nameof(StartFade), 5.0f);
         Explode();
@@ -48,7 +50,12 @@ public class SplashCameraController : MonoBehaviour
 
     void ExplosionSound()
     {
-        explosionSoundFX.Play(0);
+        _audioSource.PlayOneShot(_explosionSoundFx);
+    }
+
+    void CrashSound()
+    {
+        _audioSource.PlayOneShot(_crashSoundFx);
     }
     
     void Explode()
