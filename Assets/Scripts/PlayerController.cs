@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
     Vector3 movement;
     public LayerMask ground;
+    public bool cantBuild;
 
     private float _cameraHeightMin = -0.3f;
     private float _cameraHeightMax = 10.0f;
@@ -147,8 +148,8 @@ public class PlayerController : MonoBehaviour
         } else
         {
             _rb.Sleep();
-            transform.SetPositionAndRotation(_adjustedCannon.AdjustSeat.position, _adjustedCannon.AdjustSeat.rotation);
-            _playerModel.transform.rotation = _adjustedCannon.AdjustSeat.rotation;
+            transform.SetPositionAndRotation(_adjustedCannon.adjustSeat.position, _adjustedCannon.adjustSeat.rotation);
+            _playerModel.transform.rotation = _adjustedCannon.adjustSeat.rotation;
 
             _adjustedCannon.AddAngle(Input.GetAxis("Mouse Y"));
             _adjustedCannon.AddRotation(Input.GetAxis("Mouse X"));
@@ -163,7 +164,9 @@ public class PlayerController : MonoBehaviour
                     else SwitchState(ControllerState.Placing);
                     break;
                 case ControllerState.Placing:
+                    if (cantBuild) return;
                     _spawnableCannon.transform.SetParent(null);
+                    _spawnableCannon.GetComponent<CannonCantBuild>().placed = true;
                     _spawnableCannon.DisableBlueprintMode();
                     foreach (Collider c in _spawnableCannon.GetComponentsInChildren<Collider>())
                     {
