@@ -22,7 +22,7 @@ public class PlayerController : MonoBehaviour
 
     public float _jetPackRefuelRate = 0.15f;
     public float _jetPackFuelMax = 0.5f;
-    private float _jetPackFuel = 0.5f;
+    public float _jetPackFuel = 0.5f;
     public ParticleSystem _jetPackFX;
 
     public int lives;
