@@ -359,6 +359,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ship: {fileID: 1183127685}
   fader: {fileID: 241067516}
+  explosion: {fileID: 8902627383779312323, guid: 6f83eb0300ed34dc28207b6ed876d99c,
+    type: 3}
 --- !u!1001 &791709548
 PrefabInstance:
   m_ObjectHideFlags: 0

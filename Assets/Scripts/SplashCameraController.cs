@@ -10,16 +10,38 @@ public class SplashCameraController : MonoBehaviour
 
     public GameObject ship;
     public GameObject fader;
+    public ParticleSystem explosion;
+
+    private Vector3 _shakeOriginalPosition;
+    private float _shakeAmount;
 
     void Start()
     {
         fader.GetComponent<Animator>().SetTrigger(FadeIn);
+
+        _shakeOriginalPosition = transform.localPosition;
+        _shakeAmount = 0.5f;
+
+        Invoke(nameof(ShakeHarder), 3.0f);
         Invoke(nameof(StartFade), 5.0f);
+        Explode();
     }
 
     void Update()
     {
         transform.LookAt(ship.transform);
+        transform.localPosition = _shakeOriginalPosition + Random.insideUnitSphere * _shakeAmount;
+    }
+
+    void ShakeHarder()
+    {
+        _shakeOriginalPosition = transform.localPosition;
+        _shakeAmount = 10.0f;
+    }
+
+    void Explode()
+    {
+        Instantiate(explosion, ship.transform);
     }
 
     void StartFade()
