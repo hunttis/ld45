@@ -3,31 +3,35 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public Dictionary<string, int> collectedResourceCounts = new Dictionary<string, int>()
+    [Serializable]
+    public struct MaxResourceAmount
     {
-        {"Metal", 0},
-        {"Another", 0},
-    };
-
-    public Dictionary<string, int> maxResourceAmounts = new Dictionary<string, int>()
-    {
-        {"Metal", 5},
-        {"Another", 3}
-    };
-
-    void Update()
-    {
-
+        public string tag;
+        public int amount;
     }
 
-    void FixedUpdate()
+    public List<MaxResourceAmount> maxResourceAmounts;
+    public Dictionary<string, int> maxResourceAmountMap;
+    public Dictionary<string, int> collectedResourceAmounts;
+
+    void Awake()
     {
-        if (collectedResourceCounts["Metal"] >= maxResourceAmounts["Metal"])
+        collectedResourceAmounts = maxResourceAmounts.ToDictionary(r => r.tag, r => 0);
+        maxResourceAmountMap = maxResourceAmounts.ToDictionary(r => r.tag, r => r.amount);
+    }
+
+    public void CollectResource(string tag)
+    {
+        collectedResourceAmounts[tag] += 1;
+
+        var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.tag] == m.amount);
+        if (collectedResourceTypeCount == maxResourceAmounts.Count)
         {
-            Debug.Log("🎉");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 }
