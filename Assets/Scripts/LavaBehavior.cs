@@ -2,8 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class LavaBehavior : MonoBehaviour
 {
@@ -25,5 +27,13 @@ public class LavaBehavior : MonoBehaviour
         var timeOffset = Time.time;
         _material.SetTextureOffset(MainTex, mainTexOffset * timeOffset);
         _material.SetTextureOffset(DetailAlbedoMap, secondaryTexOffset * timeOffset);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer != LayerMask.NameToLayer("Ground") && other.gameObject.CompareTag("Metal"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }
