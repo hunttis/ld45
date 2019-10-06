@@ -4,14 +4,18 @@ using UnityEngine;
 
 public class ResourceNode : MonoBehaviour
 {
-    public GameObject ResourceType;
+    public GameObject resourceType;
+
+    private bool _isBuilt;
+
     private void OnTriggerStay(Collider other)
     {
-        if (Input.GetKeyDown(KeyCode.E) && other.GetComponent<PlayerController>() != null)
-        {
-            MineController mine = Instantiate(Resources.Load<MineController>("Mine"), transform.position, transform.rotation);
-            mine.resourceObject = ResourceType;
-            mine.spawnRate = Random.Range(0.1f, 1.0f);
-        }
+        if (_isBuilt || !Input.GetKeyDown(KeyCode.E) || other.GetComponent<PlayerController>() == null) return;
+
+        var node = transform;
+        var mine = Instantiate(Resources.Load<MineController>("Mine"), node.position, node.rotation);
+        mine.resourceObject = resourceType;
+        mine.spawnRate = 1.0f;
+        _isBuilt = true;
     }
 }
