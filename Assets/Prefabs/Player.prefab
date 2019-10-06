@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 3495978690038007944}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerController
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: mouseSensitivity.y
+      value: -0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: ground.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4485144725362690293, guid: 48681a072af432548b5223765408b971,
         type: 3}
@@ -110,21 +125,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
-        type: 3}
-      propertyPath: jumpHeight
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
-        type: 3}
-      propertyPath: mouseSensitivity.y
-      value: -0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
-        type: 3}
-      propertyPath: ground.m_Bits
-      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48681a072af432548b5223765408b971, type: 3}
