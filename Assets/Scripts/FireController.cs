@@ -14,6 +14,12 @@ public class FireController : MonoBehaviour
     private GameObject _resourceToShoot;
     private const float Tilt = 0.1f;
     private const int NormN = 6; // Quality of the random numbers; the higher the better
+    private AudioSource fireSound;
+
+    private void Awake()
+    {
+        fireSound = GetComponent<AudioSource>();
+    }
 
     private void OnTriggerStay(Collider other)
     {
@@ -39,6 +45,7 @@ public class FireController : MonoBehaviour
 
         _reloadStatus -= reloadTime;
         _resourceToShoot = null;
+        fireSound.Play(0);
 
 //        var theta = NormRand(Tilt);
 //        var tau = NormRand(Tilt);
