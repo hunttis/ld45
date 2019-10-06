@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     private ControllerState _placeMode = ControllerState.Moving;
     private Vector3 _mouseWorldPos = new Vector3();
 
-    private Transform _spawnableCannon;
+    private PlacableCannon _spawnableCannon;
 
     public static void LockCursor()
     {
@@ -63,9 +63,9 @@ public class PlayerController : MonoBehaviour
         switch (newState)
         {
             case ControllerState.Placing:
-                _spawnableCannon = Instantiate(Resources.Load<Transform>("Cannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
+                _spawnableCannon = Instantiate(Resources.Load<PlacableCannon>("Cannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
                 //_spawnableCannon.transform.Rotate(Vector3.up, 90);
-                _spawnableCannon.GetComponentInChildren<FireController>().enabled = false;
+                _spawnableCannon.EnableBlueprintMode();
 
                 foreach(Collider c in _spawnableCannon.GetComponentsInChildren<Collider>())
                 {
@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
                     break;
                 case ControllerState.Placing:
                     _spawnableCannon.transform.SetParent(null);
-                    _spawnableCannon.GetComponentInChildren<FireController>().enabled = true;
+                    _spawnableCannon.DisableBlueprintMode();
                     foreach (Collider c in _spawnableCannon.GetComponentsInChildren<Collider>())
                     {
                         c.enabled = true;
