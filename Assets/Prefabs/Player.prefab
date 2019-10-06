@@ -303,10 +303,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690295, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 6062a97519807437bb069af1e195888b,
+        type: 2}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
         type: 3}
       propertyPath: jumpHeight
-      value: 10
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
         type: 3}
@@ -317,6 +328,22 @@ PrefabInstance:
         type: 3}
       propertyPath: ground.m_Bits
       value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: _jetPackFuelMax
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: _jetPackFX
+      value: 
+      objectReference: {fileID: 5629801589640610096, guid: 864e471451fbc4ec3912ee80db6f1ddc,
+        type: 3}
+    - target: {fileID: 4485144725362690281, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48681a072af432548b5223765408b971, type: 3}
@@ -409,8 +436,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8917980907083786601, guid: 9546558400e1de345b38aafd103cdf48, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9546558400e1de345b38aafd103cdf48, type: 3}
 --- !u!1 &3495978689863813236 stripped
 GameObject:
