@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0984ee2452817e54d9fb6d5d127ee07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AdjustSeat: {fileID: 812473472102822826}
+  adjustSeat: {fileID: 812473472102822826}
 --- !u!114 &8014554552842127456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,6 +167,20 @@ MonoBehaviour:
   offset: 0
   reloadTime: 1
   velocity: 10
+--- !u!114 &9083409700715652640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7955646896991085064}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbbd306441a241a39189c23e5f070d8e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cantBuildRadius: 5
+  placed: 0
 --- !u!64 &7190922301946914609
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -228,6 +242,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 9b83a58eb28dd7941846a87c22876e91,
+        type: 3}
+      propertyPath: m_TagString
+      value: Cannon
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 9b83a58eb28dd7941846a87c22876e91,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -282,6 +301,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -4640264742112328441, guid: 9b83a58eb28dd7941846a87c22876e91,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b83a58eb28dd7941846a87c22876e91, type: 3}

@@ -10,13 +10,17 @@ public class HudController : MonoBehaviour
     public HudContainerController uiContainerController;
     public Text resourcesText;
     public GameObject buildMinePanel;
+    public GameObject fuelBarPanel;
+    public RawImage fuelBarImage;
     public bool isMineBuildable;
 
     private GameController _gameController;
+    private PlayerController _playerController;
 
     private void Start()
     {
         _gameController = uiContainerController.gameController;
+        _playerController = FindObjectOfType<PlayerController>();
     }
 
     void Update()
@@ -29,5 +33,12 @@ public class HudController : MonoBehaviour
         );
 
         buildMinePanel.SetActive(isMineBuildable);
+
+        fuelBarPanel.SetActive(_playerController._jetPackFuel < _playerController._jetPackFuelMax);
+        fuelBarImage.transform.localScale = new Vector3(
+            Math.Max(0, _playerController._jetPackFuel / _playerController._jetPackFuelMax),
+            1,
+            1
+        );
     }
 }
