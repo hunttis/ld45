@@ -316,11 +316,6 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
         type: 3}
-      propertyPath: speed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
-        type: 3}
       propertyPath: jumpHeight
       value: 1.5
       objectReference: {fileID: 0}
@@ -345,6 +340,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5629801589640610096, guid: 864e471451fbc4ec3912ee80db6f1ddc,
         type: 3}
+    - target: {fileID: 4485144725362690280, guid: 48681a072af432548b5223765408b971,
+        type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4485144725362690281, guid: 48681a072af432548b5223765408b971,
         type: 3}
       propertyPath: m_AngularDrag
