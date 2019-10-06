@@ -9,6 +9,7 @@ public class HudController : MonoBehaviour
 {
     public HudContainerController uiContainerController;
     public Text resourcesText;
+    public Text controlsText;
 
     private GameController _gameController;
 
@@ -21,8 +22,8 @@ public class HudController : MonoBehaviour
     {
         resourcesText.text = String.Join(
             "\n",
-            _gameController.maxResourceAmounts.Keys.Select(
-                tag => $"{tag}: {_gameController.collectedResourceCounts[tag]} / {_gameController.maxResourceAmounts[tag]}"
+            _gameController.maxResourceAmountMap.Keys.Select(
+                tag => $"{tag}: {_gameController.collectedResourceAmounts[tag]} / {_gameController.maxResourceAmountMap[tag]}"
             )
         );
     }
