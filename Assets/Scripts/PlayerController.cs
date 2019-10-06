@@ -110,12 +110,15 @@ public class PlayerController : MonoBehaviour
             RaycastHit rch;
             if (Physics.Raycast(_playerModel.transform.position + Vector3.up, _playerModel.transform.forward, out rch, _interactionDistance, 1 << 9))
             {
-                Debug.Log(rch.transform.name);
                 _targetedCannon = rch.transform.GetComponent<PlacableCannon>();
+                _targetedCannon.SetHighlighted(true);
             } else
             {
+                if (_targetedCannon != null) _targetedCannon.SetHighlighted(false);
                 _targetedCannon = null;
             }
+
+
 
             movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
