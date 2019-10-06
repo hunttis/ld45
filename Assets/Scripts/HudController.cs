@@ -42,7 +42,6 @@ public class HudController : MonoBehaviour
             1
         );
 
-        Debug.Log(lives.Count);
         for (var i = 0; i < 3; i++)
         {
             lives[i].enabled = _playerController.lives > i;
