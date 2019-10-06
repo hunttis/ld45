@@ -12,12 +12,14 @@ public class FireController : MonoBehaviour
 
     private float _reloadStatus;
     private GameObject _resourceToShoot;
+    private Transform _shootPoint;
     private const float Tilt = 0.1f;
     private const int NormN = 6; // Quality of the random numbers; the higher the better
     private AudioSource fireSound;
 
     private void Awake()
     {
+        _shootPoint = transform.Find("Barrel/ShootPoint");
         fireSound = GetComponent<AudioSource>();
     }
 
@@ -32,13 +34,13 @@ public class FireController : MonoBehaviour
         if (_reloadStatus < reloadTime) _reloadStatus += 1.0f / 60;
         // ReSharper disable once Unity.PerformanceCriticalCodeInvocation, not called on every frame
         if (_resourceToShoot && _reloadStatus >= reloadTime) Shoot();
+        Debug.DrawRay(_shootPoint.position, _shootPoint.forward, Color.red);
     }
 
     private void Shoot()
     {
-        var shooter = transform;
-        var shotDirection = shooter.forward;
-        _resourceToShoot.transform.position = shooter.position + shotDirection * offset;
+        var shotDirection = _shootPoint.forward;
+        _resourceToShoot.transform.position = _shootPoint.position;
         
         var body = _resourceToShoot.GetComponent<Rigidbody>();
         body.angularVelocity = new Vector3(0, 0, 0);

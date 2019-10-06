@@ -9,27 +9,27 @@ public class PlacableCannon : MonoBehaviour
     Material _blueprintMat;
     Material _highlightMat;
 
-    FireController[] _fireControllers;
-    ResourceMagnet[] _resourceMagnets;
-    ParticleSystem[] _particles;
-
-    FireController _fc;
+    FireController _fireController;
+    ResourceMagnet _resourceMagnet;
+    ParticleSystem _particleSystem;
 
     public Transform AdjustSeat;
+
+    private Transform _barrel;
 
     bool _bluePrintMode = false;
     bool _highlighted = false;
 
     private void Awake()
     {
+        _barrel = transform.Find("Barrel");
         _renderers = GetComponentsInChildren<Renderer>();
         _originalMats = new Material[_renderers.Length];
         _blueprintMat = Resources.Load<Material>("PlacementMaterial");
         _highlightMat = Resources.Load<Material>("HighlightMaterial");
-        _fireControllers = GetComponentsInChildren<FireController>();
-        _resourceMagnets = GetComponentsInChildren<ResourceMagnet>();
-        _particles = GetComponentsInChildren<ParticleSystem>();
-        _fc = GetComponentInChildren<FireController>();
+        _fireController = GetComponent<FireController>();
+        _resourceMagnet = GetComponentInChildren<ResourceMagnet>();
+        _particleSystem = GetComponentInChildren<ParticleSystem>();
         GetComponent<AudioSource>().Play();
     }
 
@@ -38,16 +38,13 @@ public class PlacableCannon : MonoBehaviour
         _bluePrintMode = setOn;
 
         // Disable fire control and magnet
-        foreach (FireController fctrl in _fireControllers) fctrl.enabled = !setOn;
-        foreach (ResourceMagnet rmgnt in _resourceMagnets) rmgnt.enabled = !setOn;
+        _fireController.enabled = !setOn;
+        _resourceMagnet.enabled = !setOn;
 
         // Disable particles
-
-        foreach (ParticleSystem particle in _particles)
-        {
-            if (setOn) particle.Pause(true);
-            else particle.Play(true);
-        }
+        
+        if (setOn) _particleSystem.Pause(true);
+        else _particleSystem.Play(true);
 
         // Set blueprint material to renderers
 
@@ -88,23 +85,24 @@ public class PlacableCannon : MonoBehaviour
     }
     public void SetAngle(float to)
     {
-        _fc.transform.localRotation = Quaternion.Euler(to, 0, 0);
+        _fireController.transform.localRotation = Quaternion.Euler(to, 0, 0);
     }
+    
     public void AddAngle(float by)
     {
-        _fc.transform.Rotate(Vector3.left, by, Space.Self);
+        _barrel.Rotate(Vector3.up, by, Space.Self);
     }
 
     public void SetRotation(float to)
     {
-        _fc.transform.localRotation = Quaternion.Euler(0, to, 0);
-
+        _fireController.transform.localRotation = Quaternion.Euler(0, to, 0);
     }
+    
     public void AddRotation(float by)
     {
-        _fc.transform.Rotate(Vector3.up, by, Space.World);
-
+        transform.Rotate(Vector3.up, by, Space.World);
     }
+    
     public void SetHighlighted(bool highlightOn)
     {
         if (_bluePrintMode) return;

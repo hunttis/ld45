@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour
         switch (newState)
         {
             case ControllerState.Placing:
-                _spawnableCannon = Instantiate(Resources.Load<PlacableCannon>("Cannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
+                _spawnableCannon = Instantiate(Resources.Load<PlacableCannon>("MagnetCannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
                 //_spawnableCannon.transform.Rotate(Vector3.up, 90);
                 _spawnableCannon.EnableBlueprintMode();
 
@@ -216,7 +216,6 @@ public class PlayerController : MonoBehaviour
             _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             _jetPackFuel -= Time.deltaTime;
         }
-        
     }
 
     public void Die(string currentScene)
