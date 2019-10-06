@@ -21,6 +21,9 @@ EditorBuildSettings:
     path: Assets/Scenes/World 01.unity
     guid: 9f653c50d0283464db119018e5224d05
   - enabled: 1
-    path: Assets/Scenes/GameCompleteScreen.unity
+    path: Assets/Scenes/World 02.unity
+    guid: dc4a23a9215e2a24aafdced5be431442
+  - enabled: 1
+    path: Assets/Scenes/GameCompleteScene.unity
     guid: 398253125255545e39cfd341076bf436
   m_configObjects: {}
