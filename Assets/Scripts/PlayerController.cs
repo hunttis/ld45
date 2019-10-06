@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour
     private PlacableCannon _targetedCannon = null;
     private PlacableCannon _adjustedCannon = null;
 
+    private AudioSource thumpSound;
+
     public static void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -58,6 +60,8 @@ public class PlayerController : MonoBehaviour
         _playerModel = FindObjectOfType<PlayerModel>();
         cameraTarget = FindObjectOfType<PlayerCameraPositionTarget>();
         _rb.maxAngularVelocity = 50f;
+
+        thumpSound = GetComponent<AudioSource>();
 
         LockCursor();
         transform.SetParent(null);
@@ -195,7 +199,9 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
+        thumpSound.Play(0);
         _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+        
     }
 
     public void Die(string currentScene)
