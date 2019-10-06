@@ -49,10 +49,10 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        _groundDistance = GetComponent<Collider>().bounds.size.y * 0.55f;
+        _groundDistance = GetComponent<Collider>().bounds.size.y * 0.75f;
         _playerModel = FindObjectOfType<PlayerModel>();
         cameraTarget = FindObjectOfType<PlayerCameraPositionTarget>();
-        _rb.maxAngularVelocity = 100f;
+        _rb.maxAngularVelocity = 50f;
 
         LockCursor();
         transform.SetParent(null);
