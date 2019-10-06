@@ -1190,6 +1190,11 @@ PrefabInstance:
       propertyPath: positionFollowTarget
       value: 
       objectReference: {fileID: 1725080965}
+    - target: {fileID: 6428157716989417529, guid: 690c258da846a4740b0130cf6df8bcc4,
+        type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8843ee655d91447eea37357ecd1bcb7f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 690c258da846a4740b0130cf6df8bcc4, type: 3}
 --- !u!1001 &2001699419
