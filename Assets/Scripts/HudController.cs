@@ -9,7 +9,8 @@ public class HudController : MonoBehaviour
 {
     public HudContainerController uiContainerController;
     public Text resourcesText;
-    public Text controlsText;
+    public Text buildMineText;
+    public bool isMineBuildable;
 
     private GameController _gameController;
 
@@ -26,5 +27,7 @@ public class HudController : MonoBehaviour
                 type => $"{type}: {_gameController.collectedResourceAmounts[type]} / {_gameController.maxResourceAmountMap[type]}"
             )
         );
+
+        buildMineText.enabled = isMineBuildable;
     }
 }

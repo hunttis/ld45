@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public GameObject pauseMenu;
+
     [Serializable]
     public struct MaxResourceAmount
     {
@@ -22,6 +24,15 @@ public class GameController : MonoBehaviour
     {
         collectedResourceAmounts = maxResourceAmounts.ToDictionary(r => r.type, r => 0);
         maxResourceAmountMap = maxResourceAmounts.ToDictionary(r => r.type, r => r.amount);
+        pauseMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            TogglePause();
+        }
     }
 
     public void CollectResource(string type)
@@ -29,11 +40,25 @@ public class GameController : MonoBehaviour
         collectedResourceAmounts[type] = Math.Min(collectedResourceAmounts[type] + 1, maxResourceAmountMap[type]);
 
         var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.type] >= m.amount);
-        Debug.Log("collectedResourceTypeCount = " + collectedResourceTypeCount);
-        Debug.Log("maxResourceAmounts.Count = " + maxResourceAmounts.Count);
         if (collectedResourceTypeCount >= maxResourceAmounts.Count)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void TogglePause()
+    {
+        if (Time.timeScale > 0.0f)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1.0f;
+            pauseMenu.SetActive(false);
         }
     }
 }
