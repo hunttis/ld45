@@ -9,7 +9,7 @@ public class HudController : MonoBehaviour
 {
     public HudContainerController uiContainerController;
     public Text resourcesText;
-    public Text buildMineText;
+    public GameObject buildMinePanel;
     public bool isMineBuildable;
 
     private GameController _gameController;
@@ -24,10 +24,10 @@ public class HudController : MonoBehaviour
         resourcesText.text = String.Join(
             "\n",
             _gameController.maxResourceAmountMap.Keys.Select(
-                type => $"{type}: {_gameController.collectedResourceAmounts[type]} / {_gameController.maxResourceAmountMap[type]}"
+                type => $"{type.ToUpper()}: {_gameController.collectedResourceAmounts[type]} / {_gameController.maxResourceAmountMap[type]}"
             )
         );
 
-        buildMineText.enabled = isMineBuildable;
+        buildMinePanel.SetActive(isMineBuildable);
     }
 }

@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     private float _jetPackFuel = 0.5f;
     public ParticleSystem _jetPackFX;
 
+    public int lives;
+
     private Rigidbody _rb;
     private bool _isJumping;
     private float _groundDistance;
@@ -92,7 +94,7 @@ public class PlayerController : MonoBehaviour
                 {
                     c.enabled = false;
                 }
-                
+
                 break;
             case ControllerState.Adjusting:
                 LockCursor();
@@ -125,12 +127,11 @@ public class PlayerController : MonoBehaviour
             movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
             _isJumping = Input.GetButton("Jump");
-            
+
             if (!_isJumping && _jetPackFuel < _jetPackFuelMax)
             {
                 _jetPackFuel = Mathf.Clamp(_jetPackFuel + _jetPackRefuelRate * Time.deltaTime, 0, _jetPackFuelMax);
             }
-
 
             if (MouseLocked)
             {
@@ -151,10 +152,6 @@ public class PlayerController : MonoBehaviour
 
             _adjustedCannon.AddAngle(Input.GetAxis("Mouse Y"));
             _adjustedCannon.AddRotation(Input.GetAxis("Mouse X"));
-        }
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.LeftControl))
-        {
-            ToggleMouseLock();
         }
 
         if (Input.GetKeyDown(KeyCode.F))
@@ -220,7 +217,12 @@ public class PlayerController : MonoBehaviour
 
     public void Die(string currentScene)
     {
-        PlayerPrefs.SetString("currentWorldScene", currentScene);
-        SceneManager.LoadScene("GameOverScene");
+        lives -= 1;
+
+        if (lives <= 0)
+        {
+            PlayerPrefs.SetString("currentWorldScene", currentScene);
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 }
