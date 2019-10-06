@@ -39,8 +39,11 @@ public class FireController : MonoBehaviour
         var shooter = transform;
         var shotDirection = shooter.forward;
         _resourceToShoot.transform.position = shooter.position + shotDirection * offset;
-
+        
         var body = _resourceToShoot.GetComponent<Rigidbody>();
+        body.angularVelocity = new Vector3(0, 0, 0);
+        body.rotation = Quaternion.identity;
+        body.velocity = new Vector3(0, 0, 0);
         body.AddForce(shotDirection * velocity, ForceMode.Impulse);
 
         _reloadStatus -= reloadTime;
