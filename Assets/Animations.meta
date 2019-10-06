@@ -1,7 +1,12 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Animations.meta
 guid: c438abdc7c973b146a2e3f2d7ecb4279
 folderAsset: yes
 DefaultImporter:
+=======
+guid: 1fc3c809327529c4e917ca559505434e
+PrefabImporter:
+>>>>>>> Add Uranium and add materials to resources:Assets/Prefabs/Uranium.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
