@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
         Vector3 rotatedDirection = Quaternion.Euler(0, 90, 0) * _playerModel.transform.TransformDirection(direction);
 //        _rb.angularVelocity += rotatedDirection * speed;
         _rb.AddTorque(rotatedDirection * speed, ForceMode.VelocityChange);
+        if (_isJumping && _jetPackFuel > 0) _rb.AddForce(_playerModel.transform.rotation* direction * 10 * speed);
     }
 
     private void Jump()
