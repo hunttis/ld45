@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     private AudioSource thumpSound;
 
+    private Vector3 _originalPosition;
+
     public static void LockCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -69,6 +71,8 @@ public class PlayerController : MonoBehaviour
         _rb.maxAngularVelocity = 50f;
 
         thumpSound = GetComponent<AudioSource>();
+
+        _originalPosition = _rb.position;
 
         LockCursor();
         transform.SetParent(null);
@@ -227,6 +231,12 @@ public class PlayerController : MonoBehaviour
         {
             PlayerPrefs.SetString("currentWorldScene", currentScene);
             SceneManager.LoadScene("GameOverScene");
+        }
+        else
+        {
+            _rb.transform.position = _originalPosition;
+            _rb.velocity = Vector3.zero;
+            _rb.angularVelocity = Vector3.zero;
         }
     }
 }
