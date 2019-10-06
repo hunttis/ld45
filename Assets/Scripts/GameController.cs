@@ -3,31 +3,62 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
-    public Dictionary<string, int> collectedResourceCounts = new Dictionary<string, int>()
-    {
-        {"Metal", 0},
-        {"Another", 0},
-    };
+    public GameObject pauseMenu;
 
-    public Dictionary<string, int> maxResourceAmounts = new Dictionary<string, int>()
+    [Serializable]
+    public struct MaxResourceAmount
     {
-        {"Metal", 5},
-        {"Another", 3}
-    };
-
-    void Update()
-    {
-
+        public string type;
+        public int amount;
     }
 
-    void FixedUpdate()
+    public List<MaxResourceAmount> maxResourceAmounts;
+    public Dictionary<string, int> maxResourceAmountMap;
+    public Dictionary<string, int> collectedResourceAmounts;
+
+    void Awake()
     {
-        if (collectedResourceCounts["Metal"] >= maxResourceAmounts["Metal"])
+        collectedResourceAmounts = maxResourceAmounts.ToDictionary(r => r.type, r => 0);
+        maxResourceAmountMap = maxResourceAmounts.ToDictionary(r => r.type, r => r.amount);
+        pauseMenu.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            Debug.Log("🎉");
+            TogglePause();
+        }
+    }
+
+    public void CollectResource(string type)
+    {
+        collectedResourceAmounts[type] = Math.Min(collectedResourceAmounts[type] + 1, maxResourceAmountMap[type]);
+
+        var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.type] >= m.amount);
+        if (collectedResourceTypeCount >= maxResourceAmounts.Count)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        }
+    }
+
+    public void TogglePause()
+    {
+        if (Time.timeScale > 0.0f)
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Time.timeScale = 0.0f;
+            pauseMenu.SetActive(true);
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Time.timeScale = 1.0f;
+            pauseMenu.SetActive(false);
         }
     }
 }

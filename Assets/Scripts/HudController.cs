@@ -9,6 +9,8 @@ public class HudController : MonoBehaviour
 {
     public HudContainerController uiContainerController;
     public Text resourcesText;
+    public Text buildMineText;
+    public bool isMineBuildable;
 
     private GameController _gameController;
 
@@ -21,9 +23,11 @@ public class HudController : MonoBehaviour
     {
         resourcesText.text = String.Join(
             "\n",
-            _gameController.maxResourceAmounts.Keys.Select(
-                tag => $"{tag}: {_gameController.collectedResourceCounts[tag]} / {_gameController.maxResourceAmounts[tag]}"
+            _gameController.maxResourceAmountMap.Keys.Select(
+                type => $"{type}: {_gameController.collectedResourceAmounts[type]} / {_gameController.maxResourceAmountMap[type]}"
             )
         );
+
+        buildMineText.enabled = isMineBuildable;
     }
 }

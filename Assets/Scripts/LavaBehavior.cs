@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -32,8 +31,7 @@ public class LavaBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground") && other.gameObject.CompareTag("Metal"))
-        {
+        if (other.gameObject.GetComponent<Resource>()) {
             Destroy(other.gameObject);
         }
 
