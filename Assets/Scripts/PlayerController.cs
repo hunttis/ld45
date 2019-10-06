@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public enum ControllerState { Moving, Placing, Adjusting }
@@ -155,5 +156,11 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
+    }
+
+    public void Die(string currentScene)
+    {
+        PlayerPrefs.SetString("currentWorldScene", currentScene);
+        SceneManager.LoadScene("GameOverScene");
     }
 }

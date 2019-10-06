@@ -30,6 +30,6 @@ public class SplashCameraController : MonoBehaviour
 
     void EndSplash()
     {
-        SceneManager.LoadScene("World 01", LoadSceneMode.Single);
+        SceneManager.LoadScene("World 01");
     }
 }

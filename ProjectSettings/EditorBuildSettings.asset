@@ -12,6 +12,12 @@ EditorBuildSettings:
     path: Assets/Scenes/SplashScene.unity
     guid: 35666ccaaab3f4a47a7083ce796b5211
   - enabled: 1
+    path: Assets/Scenes/GameOverScene.unity
+    guid: ce9c7f2b965e5474698ef803ee8eb4bb
+  - enabled: 1
+    path: Assets/Scenes/World 00.unity
+    guid: 95df65a344fb145f7bb941bd731bbd18
+  - enabled: 1
     path: Assets/Scenes/World 01.unity
     guid: 9f653c50d0283464db119018e5224d05
   m_configObjects: {}

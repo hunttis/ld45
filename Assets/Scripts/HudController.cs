@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UiController : MonoBehaviour
+public class HudController : MonoBehaviour
 {
-    public UiContainerController uiContainerController;
+    public HudContainerController uiContainerController;
     public Text resourcesText;
 
     private GameController _gameController;
