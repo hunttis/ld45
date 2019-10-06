@@ -9,10 +9,10 @@ public class PlayerController : MonoBehaviour
 {
     public static bool MouseLocked { get { return Cursor.lockState != CursorLockMode.None; }}
 
-    public float speed = 25.0f;
+    public float speed;
     public float jumpHeight = 2f;
     public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
-    public Vector3 movement;
+    Vector3 movement;
     public LayerMask ground;
 
     private float _cameraHeightMin = -0.3f;
@@ -52,6 +52,7 @@ public class PlayerController : MonoBehaviour
         _groundDistance = GetComponent<Collider>().bounds.size.y * 0.55f;
         _playerModel = FindObjectOfType<PlayerModel>();
         cameraTarget = FindObjectOfType<PlayerCameraPositionTarget>();
+        _rb.maxAngularVelocity = 100f;
 
         LockCursor();
         transform.SetParent(null);
@@ -146,7 +147,9 @@ public class PlayerController : MonoBehaviour
 
     private void Move(Vector3 direction)
     {
-        _rb.AddForce(_playerModel.transform.TransformDirection(direction) * speed);
+        Vector3 rotatedDirection = Quaternion.Euler(0, 90, 0) * _playerModel.transform.TransformDirection(direction);
+        _rb.angularVelocity += rotatedDirection * speed;
+//        _rb.AddTorque(rotatedDirection * speed, ForceMode.VelocityChange);
     }
 
     private void Jump()
