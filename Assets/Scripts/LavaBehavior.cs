@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UIElements;
 
@@ -34,6 +35,12 @@ public class LavaBehavior : MonoBehaviour
         if (other.gameObject.layer != LayerMask.NameToLayer("Ground") && other.gameObject.CompareTag("Metal"))
         {
             Destroy(other.gameObject);
+        }
+
+        var playerController = other.GetComponent<PlayerController>();
+        if (playerController != null)
+        {
+            playerController.Die(SceneManager.GetActiveScene().name);
         }
     }
 }
