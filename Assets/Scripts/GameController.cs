@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 
 public class GameController : MonoBehaviour
 {
@@ -27,10 +26,12 @@ public class GameController : MonoBehaviour
 
     public void CollectResource(string type)
     {
-        collectedResourceAmounts[type] += 1;
+        collectedResourceAmounts[type] = Math.Min(collectedResourceAmounts[type] + 1, maxResourceAmountMap[type]);
 
-        var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.type] == m.amount);
-        if (collectedResourceTypeCount == maxResourceAmounts.Count)
+        var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.type] >= m.amount);
+        Debug.Log("collectedResourceTypeCount = " + collectedResourceTypeCount);
+        Debug.Log("maxResourceAmounts.Count = " + maxResourceAmounts.Count);
+        if (collectedResourceTypeCount >= maxResourceAmounts.Count)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
