@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public Vector2 mouseSensitivity = new Vector2(2.0f, 0.4f);
     public Vector3 movement;
     public LayerMask ground;
-    public Transform CannonPrefab;
 
     private float _cameraHeightMin = -0.3f;
     private float _cameraHeightMax = 10.0f;
@@ -64,8 +63,14 @@ public class PlayerController : MonoBehaviour
         {
             case ControllerState.Placing:
                 _spawnableCannon = Instantiate(Resources.Load<Transform>("Cannon"), _playerModel.transform.position + _playerModel.transform.forward*3 + Vector3.down*0.1f, _playerModel.transform.rotation, _playerModel.transform);
-                _spawnableCannon.Rotate(Vector3.up, 90);
-                _spawnableCannon.GetComponent<Collider>().enabled = false;
+                //_spawnableCannon.transform.Rotate(Vector3.up, 90);
+                _spawnableCannon.GetComponentInChildren<FireController>().enabled = false;
+
+                foreach(Collider c in _spawnableCannon.GetComponentsInChildren<Collider>())
+                {
+                    c.enabled = false;
+                }
+                
                 break;
             case ControllerState.Adjusting:
                 LockCursor();
@@ -107,8 +112,12 @@ public class PlayerController : MonoBehaviour
                     SwitchState(ControllerState.Placing);
                     break;
                 case ControllerState.Placing:
-                    _spawnableCannon.SetParent(null);
-                    _spawnableCannon.GetComponent<Collider>().enabled = true;
+                    _spawnableCannon.transform.SetParent(null);
+                    _spawnableCannon.GetComponentInChildren<FireController>().enabled = true;
+                    foreach (Collider c in _spawnableCannon.GetComponentsInChildren<Collider>())
+                    {
+                        c.enabled = true;
+                    }
                     SwitchState(ControllerState.Moving);
                     break;
 
