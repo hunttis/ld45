@@ -30,6 +30,7 @@ public class PlacableCannon : MonoBehaviour
         _resourceMagnets = GetComponentsInChildren<ResourceMagnet>();
         _particles = GetComponentsInChildren<ParticleSystem>();
         _fc = GetComponentInChildren<FireController>();
+        GetComponent<AudioSource>().Play();
     }
 
     private void BlueprintMode(bool setOn)
