@@ -11,7 +11,10 @@ public class PlacableCannon : MonoBehaviour
     FireController[] _fireControllers;
     ResourceMagnet[] _resourceMagnets;
     ParticleSystem[] _particles;
+    
+    FireController _fc;
 
+    public Transform AdjustSeat;
 
     private void Awake()
     {
@@ -21,6 +24,7 @@ public class PlacableCannon : MonoBehaviour
         _fireControllers = GetComponentsInChildren<FireController>();
         _resourceMagnets = GetComponentsInChildren<ResourceMagnet>();
         _particles = GetComponentsInChildren<ParticleSystem>();
+        _fc = GetComponentInChildren<FireController>();
     }
 
     private void BlueprintMode(bool setOn)
@@ -60,5 +64,24 @@ public class PlacableCannon : MonoBehaviour
     public void DisableBlueprintMode()
     {
         BlueprintMode(false);
+    }
+    public void SetAngle(float to)
+    {
+        _fc.transform.localRotation = Quaternion.Euler(to, 0, 0);
+    }
+    public void AddAngle(float by)
+    {
+        _fc.transform.Rotate(Vector3.left, by, Space.Self);
+    }
+
+    public void SetRotation(float to)
+    {
+        _fc.transform.localRotation = Quaternion.Euler(0, to, 0);
+
+    }
+    public void AddRotation(float by)
+    {
+        _fc.transform.Rotate(Vector3.up, by, Space.World);
+
     }
 }

@@ -34,6 +34,10 @@ public class PlayerController : MonoBehaviour
     private Vector3 _mouseWorldPos = new Vector3();
 
     private PlacableCannon _spawnableCannon;
+    private float _interactionDistance = 5.0f;
+
+    private PlacableCannon _targetedCannon = null;
+    private PlacableCannon _adjustedCannon = null;
 
     public static void LockCursor()
     {
@@ -61,6 +65,14 @@ public class PlayerController : MonoBehaviour
 
     private void SwitchState(ControllerState newState)
     {
+        switch (_placeMode)
+        {
+            case ControllerState.Adjusting:
+                transform.SetParent(null);
+                _playerModel.transform.rotation = Quaternion.Euler(_playerModel.transform.rotation.eulerAngles.y * Vector3.up);
+                _adjustedCannon = null;
+                break;
+        }
         switch (newState)
         {
             case ControllerState.Placing:
@@ -76,6 +88,7 @@ public class PlayerController : MonoBehaviour
                 break;
             case ControllerState.Adjusting:
                 LockCursor();
+                _adjustedCannon = _targetedCannon;
                 break;
             case ControllerState.Moving:
                 LockCursor();
@@ -88,30 +101,55 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-
-        _isGrounded = Physics.CheckSphere(_rb.position, _groundDistance, ground, QueryTriggerInteraction.Ignore);
-        _isJumping = Input.GetButtonDown("Jump") && _isGrounded;
-
-        if (MouseLocked)
+        if (_placeMode != ControllerState.Adjusting)
         {
-            _playerModel.transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSensitivity.x, 0);
-
-            if (cameraTarget != null)
+            RaycastHit rch;
+            if (Physics.Raycast(_playerModel.transform.position + Vector3.up, _playerModel.transform.forward, out rch, _interactionDistance, 1 << 9))
             {
-                Vector3 cameraTargetPos = cameraTarget.transform.localPosition;
-                cameraTargetPos.y = Mathf.Clamp(cameraTargetPos.y + Input.GetAxis("Mouse Y") * mouseSensitivity.y, _cameraHeightMin, _cameraHeightMax);
-                cameraTarget.transform.localPosition = cameraTargetPos;
+                Debug.Log(rch.transform.name);
+                _targetedCannon = rch.transform.GetComponent<PlacableCannon>();
+            } else
+            {
+                _targetedCannon = null;
             }
+
+            movement = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+
+            _isGrounded = Physics.CheckSphere(_rb.position, _groundDistance, ground, QueryTriggerInteraction.Ignore);
+            _isJumping = Input.GetButtonDown("Jump") && _isGrounded;
+
+            if (MouseLocked)
+            {
+                _playerModel.transform.Rotate(0, Input.GetAxis("Mouse X") * mouseSensitivity.x, 0);
+
+                if (cameraTarget != null)
+                {
+                    Vector3 cameraTargetPos = cameraTarget.transform.localPosition;
+                    cameraTargetPos.y = Mathf.Clamp(cameraTargetPos.y + Input.GetAxis("Mouse Y") * mouseSensitivity.y, _cameraHeightMin, _cameraHeightMax);
+                    cameraTarget.transform.localPosition = cameraTargetPos;
+                }
+            }
+        } else
+        {
+            _rb.Sleep();
+            transform.SetPositionAndRotation(_adjustedCannon.AdjustSeat.position, _adjustedCannon.AdjustSeat.rotation);
+            _playerModel.transform.rotation = _adjustedCannon.AdjustSeat.rotation;
+
+            _adjustedCannon.AddAngle(Input.GetAxis("Mouse Y"));
+            _adjustedCannon.AddRotation(Input.GetAxis("Mouse X"));
         }
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.LeftControl)) ToggleMouseLock();
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            ToggleMouseLock();
+        }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
             switch (_placeMode)
             {
                 case ControllerState.Moving:
-                    SwitchState(ControllerState.Placing);
+                    if (_targetedCannon != null) SwitchState(ControllerState.Adjusting);
+                    else SwitchState(ControllerState.Placing);
                     break;
                 case ControllerState.Placing:
                     _spawnableCannon.transform.SetParent(null);
@@ -122,10 +160,11 @@ public class PlayerController : MonoBehaviour
                     }
                     SwitchState(ControllerState.Moving);
                     break;
-
+                case ControllerState.Adjusting:
+                    SwitchState(ControllerState.Moving);
+                    break;
             }
         }
-
     }
 
     private void ToggleMouseLock()
@@ -142,6 +181,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (_placeMode == ControllerState.Adjusting) return;
         Move(movement);
         if (_isJumping) Jump();
     }
