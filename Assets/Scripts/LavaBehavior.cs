@@ -32,8 +32,7 @@ public class LavaBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer != LayerMask.NameToLayer("Ground") && other.gameObject.CompareTag("Metal"))
-        {
+        if (other.gameObject.GetComponent<Resource>()) {
             Destroy(other.gameObject);
         }
 

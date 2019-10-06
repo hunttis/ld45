@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -439.45, y: 262.01}
+  m_AnchoredPosition: {x: -443, y: 233}
   m_SizeDelta: {x: 99.14, y: 83.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6186146105539670363
@@ -341,7 +341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 55, y: -296}
+  m_AnchoredPosition: {x: 378, y: -244}
   m_SizeDelta: {x: 320, y: 45}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3560013219226918291
@@ -383,6 +383,6 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Moving: AWSD | Jump: SPACE
+  m_Text: 'Moving: WASD | Jump: SPACE
 
     Place mine: E | Place cannon: F'

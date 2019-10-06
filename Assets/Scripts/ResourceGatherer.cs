@@ -3,15 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class ResourceGatherer : MonoBehaviour
 {
-    private void OnCollisionEnter(Collision other)
-    {
-        if (!other.gameObject.GetComponent<Resource>()) return;
+    private GameController _gameController;
 
+    void Awake()
+    {
+        _gameController = FindObjectOfType<GameController>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        var resource = other.gameObject.GetComponent<Resource>();
+        if (!resource) return;
+
+        _gameController.CollectResource(resource.GetResourceType());
         Destroy(other.gameObject);
-        // TODO: Give points?
     }
 }
