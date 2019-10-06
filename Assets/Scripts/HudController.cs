@@ -23,7 +23,7 @@ public class HudController : MonoBehaviour
         resourcesText.text = String.Join(
             "\n",
             _gameController.maxResourceAmountMap.Keys.Select(
-                tag => $"{tag}: {_gameController.collectedResourceAmounts[tag]} / {_gameController.maxResourceAmountMap[tag]}"
+                type => $"{type}: {_gameController.collectedResourceAmounts[type]} / {_gameController.maxResourceAmountMap[type]}"
             )
         );
     }
