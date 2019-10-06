@@ -12,6 +12,7 @@ public class HudController : MonoBehaviour
     public GameObject buildMinePanel;
     public GameObject fuelBarPanel;
     public RawImage fuelBarImage;
+    public List<RawImage> lives;
     public bool isMineBuildable;
 
     private GameController _gameController;
@@ -40,5 +41,11 @@ public class HudController : MonoBehaviour
             1,
             1
         );
+
+        Debug.Log(lives.Count);
+        for (var i = 0; i < 3; i++)
+        {
+            lives[i].enabled = _playerController.lives > i;
+        }
     }
 }
