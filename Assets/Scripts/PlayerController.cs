@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float _jetPackRefuelRate = 0.15f;
     public float _jetPackFuelMax = 0.5f;
     private float _jetPackFuel = 0.5f;
+    public ParticleSystem _jetPackFX;
 
     private Rigidbody _rb;
     private bool _isJumping;
@@ -210,6 +211,7 @@ public class PlayerController : MonoBehaviour
     {
         if (_jetPackFuel > 0)
         {
+            Instantiate(_jetPackFX, _playerModel.transform.position + Vector3.down, Quaternion.identity);
             thumpSound.Play(0);
             _rb.AddForce(Vector3.up * jumpHeight, ForceMode.Impulse);
             _jetPackFuel -= Time.deltaTime;
