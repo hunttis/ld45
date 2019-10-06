@@ -9,6 +9,7 @@ public class HudController : MonoBehaviour
 {
     public HudContainerController uiContainerController;
     public Text resourcesText;
+    public Text controlsText;
 
     private GameController _gameController;
 
