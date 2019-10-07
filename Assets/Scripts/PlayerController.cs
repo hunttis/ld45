@@ -234,9 +234,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            _rb.transform.position = _originalPosition;
-            _rb.velocity = Vector3.zero;
-            _rb.angularVelocity = Vector3.zero;
+            _rb.velocity *= -1.1f;
+            _playerModel.GetComponent<Animator>().SetTrigger("Hit");
         }
     }
 }
