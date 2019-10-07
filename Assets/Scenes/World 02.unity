@@ -1096,7 +1096,7 @@ PrefabInstance:
     - target: {fileID: 3421698097700302585, guid: e627c3d125ce942678795b8cdaf54ed7,
         type: 3}
       propertyPath: nextScene
-      value: GameCompleteScene
+      value: Cutscene03
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e627c3d125ce942678795b8cdaf54ed7, type: 3}

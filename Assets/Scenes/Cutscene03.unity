@@ -254,11 +254,12 @@ MonoBehaviour:
   explosion: {fileID: 8902627383779312323, guid: 6f83eb0300ed34dc28207b6ed876d99c,
     type: 3}
   _explosionSoundFx: {fileID: 8300000, guid: 3a6a38c1ab15d428c9f32f1fd60866b5, type: 3}
-  _crashSoundFx: {fileID: 8300000, guid: c71408c56872242eb84aede4c0bc3094, type: 3}
-  firstExplosionDelay: 0.5
-  secondExplosionDelay: 3
+  _crashSoundFx: {fileID: 8300000, guid: 3a6a38c1ab15d428c9f32f1fd60866b5, type: 3}
+  firstExplosionDelay: 0
+  secondExplosionDelay: 2
   thirdExplosionDelay: 4
   nextScene: GameCompleteScene
+  shouldExplode: 0
 --- !u!95 &71031024
 Animator:
   serializedVersion: 3
@@ -6107,7 +6108,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.3993749, b: 0, a: 1}
+      maxColor: {r: 0, g: 1, b: 0.6874752, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
