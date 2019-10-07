@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public GameObject pauseMenu;
+    public String nextScene;
 
     [Serializable]
     public struct MaxResourceAmount
@@ -42,7 +43,7 @@ public class GameController : MonoBehaviour
         var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.type] >= m.amount);
         if (collectedResourceTypeCount >= maxResourceAmounts.Count)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            SceneManager.LoadScene(nextScene);
         }
     }
 

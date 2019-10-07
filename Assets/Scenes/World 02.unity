@@ -1093,6 +1093,11 @@ PrefabInstance:
       propertyPath: maxResourceAmounts.Array.data[1].amount
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3421698097700302585, guid: e627c3d125ce942678795b8cdaf54ed7,
+        type: 3}
+      propertyPath: nextScene
+      value: GameCompleteScene
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e627c3d125ce942678795b8cdaf54ed7, type: 3}
 --- !u!114 &1328869238 stripped

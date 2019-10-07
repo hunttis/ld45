@@ -1415,6 +1415,11 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1777205814}
+    - target: {fileID: 3421698097700302585, guid: e627c3d125ce942678795b8cdaf54ed7,
+        type: 3}
+      propertyPath: nextScene
+      value: Cutscene02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e627c3d125ce942678795b8cdaf54ed7, type: 3}
 --- !u!114 &1136248945 stripped
@@ -2152,6 +2157,21 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 72056951065728295, guid: c21222ba4a570497bbd92f2335c3944e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 72056951065728295, guid: c21222ba4a570497bbd92f2335c3944e,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1264063413572976521, guid: c21222ba4a570497bbd92f2335c3944e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1264063413572976521, guid: c21222ba4a570497bbd92f2335c3944e,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2210,21 +2230,6 @@ PrefabInstance:
     - target: {fileID: 5632833418398935303, guid: c21222ba4a570497bbd92f2335c3944e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1264063413572976521, guid: c21222ba4a570497bbd92f2335c3944e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 72056951065728295, guid: c21222ba4a570497bbd92f2335c3944e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 72056951065728295, guid: c21222ba4a570497bbd92f2335c3944e,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7360741683593771311, guid: c21222ba4a570497bbd92f2335c3944e,

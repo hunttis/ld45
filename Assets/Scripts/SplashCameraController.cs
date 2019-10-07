@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Random = UnityEngine.Random;
 
 public class SplashCameraController : MonoBehaviour
 {
@@ -18,6 +20,12 @@ public class SplashCameraController : MonoBehaviour
     private AudioSource _audioSource;
     public AudioClip _explosionSoundFx;
     public AudioClip _crashSoundFx;
+    public float firstExplosionDelay;
+    public float secondExplosionDelay;
+    public float thirdExplosionDelay;
+
+    public string nextScene;
+    public Boolean shouldExplode = true;
 
     void Start()
     {
@@ -28,12 +36,16 @@ public class SplashCameraController : MonoBehaviour
 
         _audioSource = GetComponent<AudioSource>();
 
-        Invoke(nameof(ExplosionSound), 0.5f);
-        Invoke(nameof(ExplosionSound), 3.5f);
-        Invoke(nameof(CrashSound), 4.7f);
+        Invoke(nameof(ExplosionSound), firstExplosionDelay);
+        Invoke(nameof(ExplosionSound), secondExplosionDelay);
+        Invoke(nameof(CrashSound), thirdExplosionDelay);
         Invoke(nameof(ShakeHarder), 3.0f);
         Invoke(nameof(StartFade), 5.0f);
-        Explode();
+
+        if (shouldExplode)
+        {
+            Explode();
+        }
     }
 
     void Update()
@@ -71,6 +83,6 @@ public class SplashCameraController : MonoBehaviour
 
     void EndSplash()
     {
-        SceneManager.LoadScene("World 00");
+        SceneManager.LoadScene(nextScene);
     }
 }
