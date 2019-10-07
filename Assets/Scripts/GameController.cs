@@ -34,6 +34,11 @@ public class GameController : MonoBehaviour
         {
             TogglePause();
         }
+
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            GoToNextScene();
+        }
     }
 
     public void CollectResource(string type)
@@ -43,8 +48,13 @@ public class GameController : MonoBehaviour
         var collectedResourceTypeCount = maxResourceAmounts.Count(m => collectedResourceAmounts[m.type] >= m.amount);
         if (collectedResourceTypeCount >= maxResourceAmounts.Count)
         {
-            SceneManager.LoadScene(nextScene);
+            GoToNextScene();
         }
+    }
+
+    public void GoToNextScene()
+    {
+        SceneManager.LoadScene(nextScene);
     }
 
     public void TogglePause()

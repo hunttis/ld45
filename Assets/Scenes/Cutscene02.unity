@@ -503,6 +503,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 199.99998
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: 9b660a0615fa045ab835ecba03f1be87,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb986176d30f34d9f8bc0345bf65843c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b660a0615fa045ab835ecba03f1be87, type: 3}
 --- !u!4 &1309958805 stripped
@@ -656,6 +661,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 200
       objectReference: {fileID: 0}
+    - target: {fileID: -1504981713932161579, guid: dadb01e07ad34475fbb2074f151b814a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb986176d30f34d9f8bc0345bf65843c, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dadb01e07ad34475fbb2074f151b814a, type: 3}
 --- !u!1 &1574547104
@@ -978,6 +988,7 @@ MonoBehaviour:
   secondExplosionDelay: 3
   thirdExplosionDelay: 4
   nextScene: World 02
+  shouldExplode: 1
 --- !u!95 &1668383806
 Animator:
   serializedVersion: 3
